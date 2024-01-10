@@ -21,7 +21,7 @@
 
           var text = "--- getArticleId(ary) called ---<br>";
           for (let i = 0; i < ary.length; ++i) {
-              text += ary[i] + "<br>";
+              text += (ary[i] + "<br>");
           }
           text += "<br>";
           document.getElementById('displayText').innerHTML = text;
@@ -30,7 +30,7 @@
       function test() {
 
           if (window.JavascriptInterface) {
-              window.JavascriptInterface.retrieveArticleId()
+              window.JavascriptInterface.retrieveArticleId();
           } else if (window.webkit
                      && window.webkit.messageHandlers
                      && window.webkit.messageHandlers.appWebviewAnalytics) {
