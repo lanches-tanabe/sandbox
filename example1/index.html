@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <style type="text/css">
+      body {
+          font-size: 400%;
+      }
+    </style>
+  </head>
+
+  <body>
+
+    <div id="displayText"></div>
+    <button onclick="test()">Call test()</button>
+
+    <script type="text/javascript">
+
+      function getArticleId(ary) {
+          console.log(ary);
+
+          var text = "--- getArticleId(ary) called ---<br>";
+          for (let i = 0; i < ary.length; ++i) {
+              text += ary[i] + "<br>";
+          }
+          text += "<br>";
+          document.getElementById('displayText').innerHTML = text;
+      }
+
+      function test() {
+
+          if (window.JavascriptInterface) {
+              window.JavascriptInterface.retrieveArticleId()
+          } else if (window.webkit
+                     && window.webkit.messageHandlers
+                     && window.webkit.messageHandlers.appWebviewAnalytics) {
+              var message = {
+                  command: 'window.JavascriptInterface.retrieveArticleId'
+              };
+              window.webkit.messageHandlers.appWebviewAnalytics.postMessage(message);
+          } else {
+              // No Android or iOS interface found                                                       
+              console.log("No native APIs found.");
+
+              var text = "No native APIs found.<br>";
+              text += window.navigator.userAgent + "<br>";
+              document.getElementById('displayText').innerHTML = text;
+        }
+    }
+    </script>
+  </body>
+</html>
+
